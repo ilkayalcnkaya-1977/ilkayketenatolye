@@ -3,19 +3,19 @@ const products = [
     name: "Keten Pantolon",
     price: 950,
     category: "Pantolon",
-    image: "/images/pantolon-beyaz.jpg"
+    image: "/IMG_0647.png"
   },
   {
     name: "Keten Pantolon Gri",
     price: 950,
     category: "Pantolon",
-    image: "/images/pantolon-gri.jpg"
+    image: "/IMG_0650.png"
   },
   {
     name: "Keten Şort",
     price: 550,
     category: "Şort",
-    image: "/images/keten-sort.jpg"
+    image: "/IMG_1276.jpeg"
   }
 ];
 
