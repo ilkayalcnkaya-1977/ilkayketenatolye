@@ -1,4 +1,5 @@
-const products = [
+ const products = [
+
   {
     name: "Keten Pantolon",
     price: 950,
@@ -6,6 +7,7 @@ const products = [
     gender: "Erkek",
     image: "/IMG_0647.png"
   },
+
   {
     name: "Keten Pantolon Gri",
     price: 950,
@@ -13,6 +15,7 @@ const products = [
     gender: "Erkek",
     image: "/IMG_0650.png"
   },
+
   {
     name: "Keten Şort",
     price: 550,
@@ -20,7 +23,9 @@ const products = [
     gender: "Erkek",
     image: "/IMG_1276.jpeg"
   }
+
 ];
+
 
 const grid = document.getElementById("productGrid");
 const more = document.getElementById("loadMore");
@@ -29,104 +34,47 @@ let activeGender = "Erkek";
 let activeFilter = "Tümü";
 let visible = 10;
 
-/* KADIN / ERKEK MENÜSÜ */
-const filtersBox = document.querySelector(".filters");
 
-if (filtersBox && !document.querySelector(".gender-switch")) {
-  const genderSwitch = document.createElement("div");
-
-  genderSwitch.className = "gender-switch";
-
-  genderSwitch.innerHTML = `
-    <button class="gender-btn" data-gender="Kadın">
-      KADIN
-    </button>
-    <button class="gender-btn active" data-gender="Erkek">
-      ERKEK
-    </button>
-  `;
-
-  filtersBox.parentNode.insertBefore(genderSwitch, filtersBox);
-
-  const style = document.createElement("style");
-
-  style.textContent = `
-    .gender-switch {
-      display:flex;
-      justify-content:center;
-      gap:38px;
-      margin:0 auto 24px;
-    }
-
-    .gender-btn {
-      border:0;
-      background:none;
-      padding:8px 3px;
-      color:#777;
-      font-family:inherit;
-      font-size:11px;
-      letter-spacing:.18em;
-      cursor:pointer;
-    }
-
-    .gender-btn.active {
-      color:#222;
-      border-bottom:1px solid #222;
-    }
-
-    .empty-products {
-      grid-column:1 / -1;
-      text-align:center;
-      padding:80px 20px;
-    }
-
-    .empty-products span {
-      font-size:10px;
-      letter-spacing:.22em;
-      color:#777;
-    }
-
-    .empty-products h3 {
-      font-family:"Playfair Display",serif;
-      font-size:30px;
-      font-weight:400;
-      margin:15px 0 8px;
-    }
-
-    .empty-products p {
-      color:#777;
-      font-size:13px;
-    }
-  `;
-
-  document.head.appendChild(style);
-}
+/* PARA */
 
 function money(value) {
+
   return new Intl.NumberFormat("tr-TR", {
     style: "currency",
     currency: "TRY"
   }).format(value);
+
 }
+
+
+/* ÜRÜNLERİ GÖSTER */
 
 function render() {
 
-  const genderProducts = products.filter(
-    product => product.gender === activeGender
-  );
+  const genderProducts =
+    products.filter(
+      product =>
+        product.gender === activeGender
+    );
+
 
   const filtered =
     activeFilter === "Tümü"
       ? genderProducts
       : genderProducts.filter(
-          product => product.category === activeFilter
+          product =>
+            product.category === activeFilter
         );
 
-  const list = filtered.slice(0, visible);
+
+  const list =
+    filtered.slice(0, visible);
+
 
   if (!list.length) {
 
     grid.innerHTML = `
+
       <div class="empty-products">
 
         <span>
@@ -142,162 +90,215 @@ function render() {
         </p>
 
       </div>
+
     `;
 
   } else {
 
-    grid.innerHTML = list.map(product => `
+    grid.innerHTML =
+      list.map(product => `
 
-      <article class="product">
+        <article class="product">
 
-        <div class="product-image">
+          <div class="product-image">
 
-          <img
-            src="${product.image}"
-            loading="lazy"
-            alt="${product.name}"
-          />
+            <img
+              src="${product.image}"
+              loading="lazy"
+              alt="${product.name}"
+            >
 
-          <button
-            class="heart"
-            type="button"
-            aria-label="Favorilere ekle"
-          >
-            ♡
-          </button>
+            <button
+              class="heart"
+              type="button"
+              aria-label="Favorilere ekle"
+            >
+              ♡
+            </button>
 
-        </div>
-
-        <div class="product-info">
-
-          <h3>
-            ${product.name.toUpperCase()}
-          </h3>
-
-          <div class="price">
-            ${money(product.price)}
           </div>
 
-          <div class="swatches">
-            <i></i>
-            <i></i>
-            <i></i>
+
+          <div class="product-info">
+
+            <h3>
+              ${product.name.toUpperCase()}
+            </h3>
+
+            <div class="price">
+              ${money(product.price)}
+            </div>
+
+            <div class="swatches">
+
+              <i></i>
+              <i></i>
+              <i></i>
+
+            </div>
+
           </div>
 
-        </div>
+        </article>
 
-      </article>
+      `).join("");
 
-    `).join("");
   }
+
 
   if (more) {
+
     more.style.display =
-      filtered.length > visible ? "block" : "none";
+      filtered.length > visible
+        ? "block"
+        : "none";
+
   }
+
 }
+
 
 /* KADIN / ERKEK */
-document.querySelectorAll("[data-gender]").forEach(button => {
 
-  button.addEventListener("click", () => {
+document
+  .querySelectorAll("[data-gender]")
+  .forEach(button => {
 
-    activeGender = button.dataset.gender;
+    button.addEventListener(
+      "click",
+      () => {
 
-    activeFilter = "Tümü";
+        activeGender =
+          button.dataset.gender;
 
-    visible = 10;
+        activeFilter = "Tümü";
 
-    document
-      .querySelectorAll(".gender-btn")
-      .forEach(item => {
+        visible = 10;
 
-        item.classList.toggle(
-          "active",
-          item.dataset.gender === activeGender
-        );
 
-      });
+        document
+          .querySelectorAll(".gender-btn")
+          .forEach(item => {
 
-    document
-      .querySelectorAll(".filters button")
-      .forEach(item => {
+            item.classList.toggle(
+              "active",
+              item.dataset.gender ===
+                activeGender
+            );
 
-        item.classList.toggle(
-          "active",
-          item.dataset.filter === "Tümü"
-        );
+          });
 
-      });
 
-    render();
+        document
+          .querySelectorAll(".filters button")
+          .forEach(item => {
 
-    document
-      .getElementById("koleksiyon")
-      ?.scrollIntoView({
-        behavior: "smooth"
-      });
+            item.classList.toggle(
+              "active",
+              item.dataset.filter === "Tümü"
+            );
+
+          });
+
+
+        render();
+
+
+        document
+          .getElementById("koleksiyon")
+          ?.scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }
+    );
 
   });
 
-});
 
 /* KATEGORİ FİLTRELERİ */
-document.querySelectorAll("[data-filter]").forEach(button => {
 
-  button.addEventListener("click", () => {
+document
+  .querySelectorAll("[data-filter]")
+  .forEach(button => {
 
-    activeFilter = button.dataset.filter;
+    button.addEventListener(
+      "click",
+      () => {
 
-    visible = 10;
+        activeFilter =
+          button.dataset.filter;
 
-    document
-      .querySelectorAll(".filters button")
-      .forEach(item => {
+        visible = 10;
 
-        item.classList.toggle(
-          "active",
-          item.dataset.filter === activeFilter
-        );
 
-      });
+        document
+          .querySelectorAll(".filters button")
+          .forEach(item => {
 
-    render();
+            item.classList.toggle(
+              "active",
+              item.dataset.filter ===
+                activeFilter
+            );
 
-    document
-      .getElementById("koleksiyon")
-      ?.scrollIntoView({
-        behavior: "smooth"
-      });
+          });
+
+
+        render();
+
+
+        document
+          .getElementById("koleksiyon")
+          ?.scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }
+    );
 
   });
 
-});
 
 /* DAHA FAZLA */
+
 if (more) {
 
-  more.addEventListener("click", () => {
+  more.addEventListener(
+    "click",
+    () => {
 
-    visible += 10;
+      visible += 10;
 
-    render();
+      render();
 
-  });
+    }
+  );
 
 }
 
+
 /* ARAMA */
-const searchBtn = document.getElementById("searchBtn");
+
+const searchBtn =
+  document.getElementById("searchBtn");
 
 if (searchBtn) {
 
-  searchBtn.addEventListener("click", () => {
+  searchBtn.addEventListener(
+    "click",
+    () => {
 
-    alert("Arama sistemi yakında aktif olacak.");
+      alert(
+        "Arama sistemi yakında aktif olacak."
+      );
 
-  });
+    }
+  );
 
 }
+
+
+/* BAŞLAT */
 
 render();
