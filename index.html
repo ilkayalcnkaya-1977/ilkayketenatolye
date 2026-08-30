@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>İlkay Keten Atölye | Doğal Keten</title>
-  <meta name="description" content="İlkay Keten Atölye — Doğal kumaş, zamansız şıklık.">
+  <meta
+    name="description"
+    content="İlkay Keten Atölye — doğal kumaş, zamansız şıklık. Keten gömlek, pantolon ve şort koleksiyonu."
+  >
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,87 +17,312 @@
       padding: 0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f3eb;
-      color: #2f2923;
+    html {
+      scroll-behavior: smooth;
     }
 
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f3eb;
+      color: #29251f;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
     header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 24px 6%;
-      border-bottom: 1px solid #ddd5ca;
+      background: rgba(247, 243, 235, 0.96);
+      border-bottom: 1px solid #ddd6ca;
+      backdrop-filter: blur(10px);
     }
 
     .logo {
       font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
 
-    nav a {
-      color: #2f2923;
-      text-decoration: none;
-      margin-left: 24px;
+    nav {
+      display: flex;
+      gap: 28px;
       font-size: 14px;
     }
 
+    nav a:hover {
+      opacity: 0.55;
+    }
+
+    /* HERO */
+
     .hero {
-      min-height: 72vh;
+      min-height: 82vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #776f64;
+      margin-bottom: 28px;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 8vw, 88px);
+      font-size: clamp(48px, 9vw, 100px);
+      line-height: 0.95;
       font-weight: 500;
-      letter-spacing: -3px;
-      margin-bottom: 20px;
+      letter-spacing: -5px;
+      margin-bottom: 30px;
     }
 
     .hero p {
-      font-size: 18px;
-      color: #6b6259;
-      margin-bottom: 32px;
+      font-size: 20px;
+      color: #6b655d;
+      margin-bottom: 38px;
     }
 
     .button {
       display: inline-block;
-      background: #2f2923;
+      padding: 17px 32px;
+      background: #29251f;
       color: white;
-      padding: 15px 28px;
-      text-decoration: none;
-      border-radius: 3px;
       font-size: 14px;
+      border-radius: 2px;
+      transition: 0.25s;
     }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* COLLECTION */
 
     .collection {
-      padding: 80px 6%;
-      border-top: 1px solid #ddd5ca;
-      text-align: center;
+      padding: 100px 6%;
+      border-top: 1px solid #ddd6ca;
     }
 
-    .collection h2 {
-      font-size: 36px;
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 45px;
+      gap: 20px;
+    }
+
+    .section-top h2 {
+      font-size: clamp(38px, 6vw, 68px);
       font-weight: 500;
-      margin-bottom: 12px;
+      letter-spacing: -3px;
     }
 
-    .collection p {
-      color: #6b6259;
+    .section-top p {
+      max-width: 330px;
+      color: #756e65;
+      line-height: 1.6;
     }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .product {
+      cursor: pointer;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 0.78;
+      overflow: hidden;
+      background: #e9e2d7;
+      margin-bottom: 18px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .product:hover img {
+      transform: scale(1.035);
+    }
+
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-name {
+      font-size: 16px;
+    }
+
+    .product-category {
+      font-size: 12px;
+      color: #81796f;
+      margin-top: 6px;
+    }
+
+    .price {
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    /* ABOUT */
+
+    .about {
+      padding: 110px 6%;
+      border-top: 1px solid #ddd6ca;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .about h2 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 500;
+      letter-spacing: -3px;
+    }
+
+    .about-text {
+      max-width: 520px;
+      color: #6b655d;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 120px 20px;
+      text-align: center;
+      border-top: 1px solid #ddd6ca;
+    }
+
+    .cta h2 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 500;
+      letter-spacing: -4px;
+      margin-bottom: 28px;
+    }
+
+    .cta p {
+      color: #756e65;
+      margin-bottom: 35px;
+    }
+
+    /* FOOTER */
 
     footer {
-      padding: 40px 6%;
-      text-align: center;
-      border-top: 1px solid #ddd5ca;
-      color: #777;
+      padding: 35px 6%;
+      border-top: 1px solid #ddd6ca;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #756e65;
       font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 20px;
+      }
+
+      .logo {
+        font-size: 17px;
+        letter-spacing: 1.5px;
+      }
+
+      nav {
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 76vh;
+        padding: 70px 20px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .collection {
+        padding: 75px 20px;
+      }
+
+      .section-top {
+        display: block;
+        margin-bottom: 30px;
+      }
+
+      .section-top h2 {
+        margin-bottom: 20px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .product-image {
+        aspect-ratio: 0.82;
+      }
+
+      .about {
+        padding: 80px 20px;
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .about-text {
+        font-size: 16px;
+      }
+
+      .cta {
+        padding: 90px 20px;
+      }
+
+      footer {
+        padding: 25px 20px;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -100,36 +330,179 @@
 <body>
 
   <header>
-    <div class="logo">İLKAY KETEN ATÖLYE</div>
+    <a href="#" class="logo">İLKAY KETEN ATÖLYE</a>
 
     <nav>
       <a href="#koleksiyon">Koleksiyon</a>
-      <a href="https://www.instagram.com/ilkayketenatolye/" target="_blank">Instagram</a>
+      <a href="https://www.instagram.com/ilkayketenatolye/" target="_blank">
+        Instagram
+      </a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <h1>İlkay Keten Atölye</h1>
-        <p>Doğal kumaş, zamansız şıklık.</p>
 
-        <a class="button"
-           href="https://wa.me/905XXXXXXXXX"
-           target="_blank">
+  <main>
+
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div class="eyebrow">Doğal Keten Koleksiyonu</div>
+
+        <h1>Doğal kumaş.<br>Zamansız şıklık.</h1>
+
+        <p>
+          Zarif, sade ve zamansız keten tasarımlar.
+        </p>
+
+        <a
+          class="button"
+          href="https://wa.me/905XXXXXXXXX"
+          target="_blank"
+        >
           WhatsApp'tan Sipariş
         </a>
+
       </div>
     </section>
 
+
     <section class="collection" id="koleksiyon">
-      <h2>Doğal Keten Koleksiyonu</h2>
-      <p>Zarif, sade ve zamansız tasarımlar.</p>
+
+      <div class="section-top">
+
+        <h2>Koleksiyon</h2>
+
+        <p>
+          Doğal ketenin rahatlığını modern ve sade
+          tasarımlarla buluşturuyoruz.
+        </p>
+
+      </div>
+
+
+      <div class="products">
+
+        <article class="product">
+
+          <div class="product-image">
+            <img
+              src="/images/IMG_1197.jpeg"
+              alt="Keten Gömlek"
+            >
+          </div>
+
+          <div class="product-info">
+            <div>
+              <div class="product-name">Keten Gömlek</div>
+              <div class="product-category">Gömlek</div>
+            </div>
+
+            <div class="price">750 TL</div>
+          </div>
+
+        </article>
+
+
+        <article class="product">
+
+          <div class="product-image">
+            <img
+              src="/images/IMG_1238.jpeg"
+              alt="Keten Pantolon"
+            >
+          </div>
+
+          <div class="product-info">
+            <div>
+              <div class="product-name">Keten Pantolon</div>
+              <div class="product-category">Pantolon</div>
+            </div>
+
+            <div class="price">950 TL</div>
+          </div>
+
+        </article>
+
+
+        <article class="product">
+
+          <div class="product-image">
+            <img
+              src="/images/IMG_1276.jpeg"
+              alt="Keten Şort"
+            >
+          </div>
+
+          <div class="product-info">
+            <div>
+              <div class="product-name">Keten Şort</div>
+              <div class="product-category">Şort</div>
+            </div>
+
+            <div class="price">550 TL</div>
+          </div>
+
+        </article>
+
+      </div>
     </section>
+
+
+    <section class="about">
+
+      <h2>
+        Ketenin<br>
+        doğal hali.
+      </h2>
+
+      <div class="about-text">
+        <p>
+          İlkay Keten Atölye olarak doğal kumaşların
+          zamansız karakterini modern tasarımlarla
+          bir araya getiriyoruz.
+        </p>
+
+        <br>
+
+        <p>
+          Sade çizgiler, rahat kalıplar ve günlük
+          kullanıma uygun tasarımlar.
+        </p>
+      </div>
+
+    </section>
+
+
+    <section class="cta">
+
+      <h2>Yeni sezonu keşfet.</h2>
+
+      <p>
+        Koleksiyondaki ürünler hakkında bilgi almak
+        ve sipariş vermek için bize ulaşın.
+      </p>
+
+      <a
+        class="button"
+        href="https://wa.me/905XXXXXXXXX"
+        target="_blank"
+      >
+        WhatsApp'tan İletişime Geç
+      </a>
+
+    </section>
+
   </main>
 
+
   <footer>
-    © 2026 İlkay Keten Atölye
+
+    <div>© 2026 İlkay Keten Atölye</div>
+
+    <div>
+      Doğal kumaş, zamansız şıklık.
+    </div>
+
   </footer>
 
 </body>
