@@ -1,5 +1,4 @@
- const products = [
-
+const products = [
   {
     name: "Keten Pantolon",
     price: 950,
@@ -7,7 +6,6 @@
     gender: "Erkek",
     image: "/IMG_0647.png"
   },
-
   {
     name: "Keten Pantolon Gri",
     price: 950,
@@ -15,7 +13,6 @@
     gender: "Erkek",
     image: "/IMG_0650.png"
   },
-
   {
     name: "Keten Şort",
     price: 550,
@@ -23,9 +20,7 @@
     gender: "Erkek",
     image: "/IMG_1276.jpeg"
   }
-
 ];
-
 
 const grid = document.getElementById("productGrid");
 const more = document.getElementById("loadMore");
@@ -34,267 +29,176 @@ let activeGender = "Erkek";
 let activeFilter = "Tümü";
 let visible = 10;
 
-
-/* PARA */
-
 function money(value) {
-
   return new Intl.NumberFormat("tr-TR", {
     style: "currency",
     currency: "TRY"
   }).format(value);
-
 }
 
-
-/* ÜRÜNLERİ GÖSTER */
-
 function render() {
-
-  const genderProducts =
-    products.filter(
-      product =>
-        product.gender === activeGender
-    );
-
+  const genderProducts = products.filter(
+    product => product.gender === activeGender
+  );
 
   const filtered =
     activeFilter === "Tümü"
       ? genderProducts
       : genderProducts.filter(
-          product =>
-            product.category === activeFilter
+          product => product.category === activeFilter
         );
 
-
-  const list =
-    filtered.slice(0, visible);
-
+  const list = filtered.slice(0, visible);
 
   if (!list.length) {
-
     grid.innerHTML = `
-
       <div class="empty-products">
-
-        <span>
-          ${activeGender.toUpperCase()} KOLEKSİYONU
-        </span>
-
-        <h3>
-          Yeni ürünler çok yakında.
-        </h3>
-
-        <p>
-          Bu kategoriye ait ürünler hazırlanıyor.
-        </p>
-
+        <span>${activeGender.toUpperCase()} KOLEKSİYONU</span>
+        <h3>Yeni ürünler çok yakında.</h3>
+        <p>Bu kategoriye ait ürünler hazırlanıyor.</p>
       </div>
-
     `;
-
   } else {
+    grid.innerHTML = list.map(product => `
+      <article class="product">
 
-    grid.innerHTML =
-      list.map(product => `
+        <div class="product-image">
 
-        <article class="product">
+          <img
+            src="${product.image}"
+            loading="lazy"
+            alt="${product.name}"
+          >
 
-          <div class="product-image">
+          <button
+            class="heart"
+            type="button"
+            aria-label="Favorilere ekle"
+          >
+            ♡
+          </button>
 
-            <img
-              src="${product.image}"
-              loading="lazy"
-              alt="${product.name}"
-            >
+        </div>
 
-            <button
-              class="heart"
-              type="button"
-              aria-label="Favorilere ekle"
-            >
-              ♡
-            </button>
+        <div class="product-info">
 
+          <h3>${product.name.toUpperCase()}</h3>
+
+          <div class="price">
+            ${money(product.price)}
           </div>
 
-
-          <div class="product-info">
-
-            <h3>
-              ${product.name.toUpperCase()}
-            </h3>
-
-            <div class="price">
-              ${money(product.price)}
-            </div>
-
-            <div class="swatches">
-
-              <i></i>
-              <i></i>
-              <i></i>
-
-            </div>
-
+          <div class="swatches">
+            <i></i>
+            <i></i>
+            <i></i>
           </div>
 
-        </article>
+        </div>
 
-      `).join("");
-
+      </article>
+    `).join("");
   }
-
 
   if (more) {
-
     more.style.display =
-      filtered.length > visible
-        ? "block"
-        : "none";
-
+      filtered.length > visible ? "block" : "none";
   }
-
 }
 
 
 /* KADIN / ERKEK */
 
-document
-  .querySelectorAll("[data-gender]")
-  .forEach(button => {
+document.querySelectorAll("[data-gender]").forEach(button => {
 
-    button.addEventListener(
-      "click",
-      () => {
+  button.addEventListener("click", () => {
 
-        activeGender =
-          button.dataset.gender;
+    activeGender = button.dataset.gender;
+    activeFilter = "Tümü";
+    visible = 10;
 
-        activeFilter = "Tümü";
+    document.querySelectorAll(".gender-btn").forEach(item => {
+      item.classList.toggle(
+        "active",
+        item.dataset.gender === activeGender
+      );
+    });
 
-        visible = 10;
+    document.querySelectorAll(".filters button").forEach(item => {
+      item.classList.toggle(
+        "active",
+        item.dataset.filter === "Tümü"
+      );
+    });
 
+    render();
 
-        document
-          .querySelectorAll(".gender-btn")
-          .forEach(item => {
-
-            item.classList.toggle(
-              "active",
-              item.dataset.gender ===
-                activeGender
-            );
-
-          });
-
-
-        document
-          .querySelectorAll(".filters button")
-          .forEach(item => {
-
-            item.classList.toggle(
-              "active",
-              item.dataset.filter === "Tümü"
-            );
-
-          });
-
-
-        render();
-
-
-        document
-          .getElementById("koleksiyon")
-          ?.scrollIntoView({
-            behavior: "smooth"
-          });
-
-      }
-    );
+    document
+      .getElementById("koleksiyon")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
 
   });
 
-
-/* KATEGORİ FİLTRELERİ */
-
-document
-  .querySelectorAll("[data-filter]")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        activeFilter =
-          button.dataset.filter;
-
-        visible = 10;
+});
 
 
-        document
-          .querySelectorAll(".filters button")
-          .forEach(item => {
+/* KATEGORİLER */
 
-            item.classList.toggle(
-              "active",
-              item.dataset.filter ===
-                activeFilter
-            );
+document.querySelectorAll("[data-filter]").forEach(button => {
 
-          });
+  button.addEventListener("click", () => {
 
+    activeFilter = button.dataset.filter;
+    visible = 10;
 
-        render();
+    document.querySelectorAll(".filters button").forEach(item => {
+      item.classList.toggle(
+        "active",
+        item.dataset.filter === activeFilter
+      );
+    });
 
+    render();
 
-        document
-          .getElementById("koleksiyon")
-          ?.scrollIntoView({
-            behavior: "smooth"
-          });
-
-      }
-    );
+    document
+      .getElementById("koleksiyon")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
 
   });
+
+});
 
 
 /* DAHA FAZLA */
 
 if (more) {
 
-  more.addEventListener(
-    "click",
-    () => {
+  more.addEventListener("click", () => {
 
-      visible += 10;
+    visible += 10;
 
-      render();
+    render();
 
-    }
-  );
+  });
 
 }
 
 
 /* ARAMA */
 
-const searchBtn =
-  document.getElementById("searchBtn");
+const searchBtn = document.getElementById("searchBtn");
 
 if (searchBtn) {
 
-  searchBtn.addEventListener(
-    "click",
-    () => {
+  searchBtn.addEventListener("click", () => {
 
-      alert(
-        "Arama sistemi yakında aktif olacak."
-      );
+    alert("Arama sistemi yakında aktif olacak.");
 
-    }
-  );
+  });
 
 }
 
