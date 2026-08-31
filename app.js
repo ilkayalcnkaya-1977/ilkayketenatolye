@@ -19,6 +19,18 @@ const products = [
     category: "Şort",
     gender: "Erkek",
     image: "/IMG_1276.jpeg"
+  },
+  {
+    name: "Yeşil Keten Pantolon",
+    price: 950,
+    category: "Pantolon",
+    gender: "Erkek",
+    image: "/IMG_0714.jpeg",
+    images: [
+      "/IMG_0714.jpeg",
+      "/IMG_0715.jpeg",
+      "/IMG_0716.jpeg"
+    ]
   }
 ];
 
@@ -64,13 +76,29 @@ function render() {
 
         <div class="product-image">
 
-<img
-  src="${product.image}"
-  loading="lazy"
-  alt="${product.name}"
-  class="product-photo"
-  onclick="openProductImage('${product.image}')"
->
+          <img
+            src="${product.image}"
+            loading="lazy"
+            alt="${product.name}"
+            class="product-photo"
+            onclick="openProductImage('${product.image}')"
+          >
+
+          ${
+            product.images
+              ? `
+                <div class="product-thumbnails">
+                  ${product.images.map(image => `
+                    <img
+                      src="${image}"
+                      alt="${product.name}"
+                      onclick="openProductImage('${image}')"
+                    >
+                  `).join("")}
+                </div>
+              `
+              : ""
+          }
 
           <button
             class="heart"
@@ -205,27 +233,44 @@ if (searchBtn) {
 }
 
 
-/* BAŞLAT */
+/* ÜRÜN FOTOĞRAFINI BÜYÜT */
 
-render();
 function openProductImage(image) {
+
   const lightbox = document.createElement("div");
 
   lightbox.className = "image-lightbox";
 
   lightbox.innerHTML = `
-    <button class="lightbox-close" aria-label="Kapat">×</button>
-    <img src="${image}" alt="Ürün görseli">
+    <button
+      class="lightbox-close"
+      aria-label="Kapat"
+    >
+      ×
+    </button>
+
+    <img
+      src="${image}"
+      alt="Ürün görseli"
+    >
   `;
 
   document.body.appendChild(lightbox);
 
   lightbox.addEventListener("click", (e) => {
+
     if (
       e.target === lightbox ||
       e.target.classList.contains("lightbox-close")
     ) {
       lightbox.remove();
     }
+
   });
+
 }
+
+
+/* BAŞLAT */
+
+render(); 
