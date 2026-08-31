@@ -1275,3 +1275,23 @@ footer > a {
 .product-thumbnails img:hover {
   opacity: 0.75;
 }
+.product-thumbnails {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.product-thumbnails img {
+  width: 55px !important;
+  height: 70px !important;
+  object-fit: cover !important;
+  cursor: zoom-in;
+  flex: 0 0 55px;
+  border: 1px solid #ddd;
+}
+
+.product-thumbnails img:hover {
+  opacity: 0.7;
+}
