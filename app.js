@@ -64,11 +64,13 @@ function render() {
 
         <div class="product-image">
 
-          <img
-            src="${product.image}"
-            loading="lazy"
-            alt="${product.name}"
-          >
+<img
+  src="${product.image}"
+  loading="lazy"
+  alt="${product.name}"
+  class="product-photo"
+  onclick="openProductImage('${product.image}')"
+>
 
           <button
             class="heart"
@@ -206,3 +208,24 @@ if (searchBtn) {
 /* BAŞLAT */
 
 render();
+function openProductImage(image) {
+  const lightbox = document.createElement("div");
+
+  lightbox.className = "image-lightbox";
+
+  lightbox.innerHTML = `
+    <button class="lightbox-close" aria-label="Kapat">×</button>
+    <img src="${image}" alt="Ürün görseli">
+  `;
+
+  document.body.appendChild(lightbox);
+
+  lightbox.addEventListener("click", (e) => {
+    if (
+      e.target === lightbox ||
+      e.target.classList.contains("lightbox-close")
+    ) {
+      lightbox.remove();
+    }
+  });
+}
